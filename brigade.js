@@ -8,7 +8,7 @@ events.on("push", (brigadeEvent, project) => {
     brigConfig.set("acrServer", project.secrets.acrServer)
     brigConfig.set("acrUsername", project.secrets.acrUsername)
     brigConfig.set("acrPassword", project.secrets.acrPassword)
-    brigConfig.set("webImage", "chzbrgr71/rating-web")
+    brigConfig.set("webImage", "squillace/rating-web")
     brigConfig.set("gitSHA", brigadeEvent.commit.substr(0,7))
     brigConfig.set("eventType", brigadeEvent.type)
     brigConfig.set("branch", getBranch(gitPayload))
@@ -71,10 +71,10 @@ function dockerJobRunner(config, d) {
 
 function helmJobRunner (config, h, deployType) {
     h.storage.enabled = false
-    h.image = "chzbrgr71/k8s-helm:v2.7.2"
+    h.image = "squillace/k8s-helm:v2.7.2"
     h.tasks = [
         "cd /src/",
-        "git clone https://github.com/chzbrgr71/rating-charts.git",
+        "git clone https://github.com/squillace/rating-charts.git",
         "cd rating-charts",
         `helm upgrade --install rating-web ./rating-web --set web.image=${config.get("webACRImage")} --set web.imageTag=${config.get("imageTag")}`
     ]

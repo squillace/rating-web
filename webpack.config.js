@@ -87,7 +87,7 @@ module.exports = {
       'Access-Control-Allow-Origin': '*',
     },
     host: '0.0.0.0',
-    public: 'heroes.brianredmond.io',
+    // public: 'heroes.brianredmond.io',
     disableHostCheck: true,
     port: 8080,
     before(app) {
@@ -98,6 +98,7 @@ module.exports = {
         console.log(`ENV KUBE_POD_NAME: `, process.env.KUBE_POD_NAME);
         console.log(`ENV KUBE_POD_IP: `, process.env.KUBE_POD_IP);
         console.log(`ENV API: `, process.env.API);
+        console.log(`ENV SITE_CODE: `, process.env.SITE_CODE);
         console.log(`Using middleware for ${req.url}`);
         next();
       });

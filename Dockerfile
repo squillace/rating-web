@@ -5,11 +5,11 @@ ARG BUILD_DATE
 ARG IMAGE_TAG_REF
 
 # Metadata
-LABEL maintainer="brianisrunning@gmail.com"
+LABEL maintainer="ralph.squillace@microsoft.com"
 LABEL org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.name="Ratings Web App" \
       org.label-schema.description="Simple node web app" \
-      org.label-schema.vcs-url="https://github.com/chzbrgr71/rating-web" \
+      org.label-schema.vcs-url="https://github.com/squillace/rating-web" \
       org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.docker.dockerfile="/Dockerfile"
 
