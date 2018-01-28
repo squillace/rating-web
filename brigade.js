@@ -21,7 +21,7 @@ events.on("push", (brigadeEvent, project) => {
     brigConfig.set("acrServer", project.secrets.acrServer)
     brigConfig.set("acrUsername", project.secrets.acrUsername)
     brigConfig.set("acrPassword", project.secrets.acrPassword)
-    brigConfig.set("webImage", "squillace/rating-web")
+    brigConfig.set("webImage", "squillace.azurecr.io/squillace/rating-web")
     brigConfig.set("gitSHA", brigadeEvent.commit.substr(0,7))
     brigConfig.set("eventType", brigadeEvent.type)
     brigConfig.set("branch", getBranch(gitPayload))
