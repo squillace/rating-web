@@ -12,7 +12,7 @@ events.on("push", (brigadeEvent, project) => {
       SLACK_MESSAGE: "rating-web github webhook felt....",
       SLACK_COLOR: "#00ff00"
     }
-	slack.run()
+	
     
 
     // setup variables
@@ -42,6 +42,7 @@ events.on("push", (brigadeEvent, project) => {
     // start pipeline
     console.log(`==> starting pipeline for docker image: ${brigConfig.get("webACRImage")}:${brigConfig.get("imageTag")}`)
     var pipeline = new Group()
+    pipeline.add(slack)
     pipeline.add(docker)
     pipeline.add(helm)
     if (brigConfig.get("branch") == "master") {
