@@ -3,7 +3,7 @@ const { events, Job, Group } = require('brigadier')
 events.on("push", (brigadeEvent, project) => {
     
     // slack announcement
-    /*
+    
     var slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
     slack.storage.enabled = false
     slack.env = {
@@ -13,7 +13,7 @@ events.on("push", (brigadeEvent, project) => {
       SLACK_COLOR: "#ff0000"
     }
 	slack.run()
-    */
+    
 
     // setup variables
     var gitPayload = JSON.parse(brigadeEvent.payload)
