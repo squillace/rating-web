@@ -3,7 +3,7 @@ const { events, Job, Group } = require('brigadier')
 events.on("push", (brigadeEvent, project) => {
     
     // slack announcement
-    
+    /*
     var slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
     slack.storage.enabled = false
     slack.env = {
@@ -12,8 +12,8 @@ events.on("push", (brigadeEvent, project) => {
       SLACK_MESSAGE: "rating-web github webhook felt....",
       SLACK_COLOR: "#00ff00"
     }
-	
-    
+	slack.run()
+    */
 
     // setup variables
     var gitPayload = JSON.parse(brigadeEvent.payload)
@@ -36,6 +36,8 @@ events.on("push", (brigadeEvent, project) => {
     // setup brigade jobs
     var docker = new Job("job-runner-docker")
     var helm = new Job("job-runner-helm")
+    var slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
+    slackJob(slack, project.secrets.SLACK_WEBHOOK, "Pipeline triggered....")
     dockerJobRunner(brigConfig, docker)
     helmJobRunner(brigConfig, helm, "prod")
     
@@ -100,7 +102,7 @@ function slackJob (s, webhook, message) {
       SLACK_WEBHOOK: webhook,
       SLACK_USERNAME: "brigade-demo",
       SLACK_MESSAGE: message,
-      SLACK_COLOR: "#0000ff"
+      SLACK_COLOR: "#00ff00"
     }
 }
 
