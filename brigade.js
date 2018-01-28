@@ -3,17 +3,17 @@ const { events, Job, Group } = require('brigadier')
 events.on("push", (brigadeEvent, project) => {
     
     // slack announcement
-    /*
+    
     var slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
     slack.storage.enabled = false
     slack.env = {
       SLACK_WEBHOOK: proj.secrets.slackWebhook,
       SLACK_USERNAME: "brigade-demo",
       SLACK_MESSAGE: "rating-web github webhook felt....",
-      SLACK_COLOR: "#ff0000"
+      SLACK_COLOR: "#00ff00"
     }
 	slack.run()
-    */
+    
 
     // setup variables
     var gitPayload = JSON.parse(brigadeEvent.payload)
