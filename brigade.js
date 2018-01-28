@@ -2,13 +2,25 @@ const { events, Job, Group } = require('brigadier')
 
 events.on("push", (brigadeEvent, project) => {
     
+    // slack announcement
+    var slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
+    slack.storage.enabled = false
+    slack.env = {
+      SLACK_WEBHOOK: proj.secrets.slackWebhook,
+      SLACK_USERNAME: "brigade-demo",
+      SLACK_MESSAGE: "rating-web github webhook felt....",
+      SLACK_COLOR: "#ff0000"
+    }
+	slack.run()
+
+
     // setup variables
     var gitPayload = JSON.parse(brigadeEvent.payload)
     var brigConfig = new Map()
     brigConfig.set("acrServer", project.secrets.acrServer)
     brigConfig.set("acrUsername", project.secrets.acrUsername)
     brigConfig.set("acrPassword", project.secrets.acrPassword)
-    brigConfig.set("webImage", "squillace/rating-web")
+    brigConfig.set("webImage", "squillace.azurecr.io/squillace/rating-web")
     brigConfig.set("gitSHA", brigadeEvent.commit.substr(0,7))
     brigConfig.set("eventType", brigadeEvent.type)
     brigConfig.set("branch", getBranch(gitPayload))
