@@ -10,7 +10,7 @@ events.on("push", (brigadeEvent, project) => {
       SLACK_WEBHOOK: proj.secrets.slackWebhook,
       SLACK_USERNAME: "brigade-demo",
       SLACK_MESSAGE: "rating-web github webhook felt....",
-      SLACK_COLOR: "#00ff00"
+      SLACK_COLOR: "#ff0000"
     }
 	slack.run()
     */
@@ -36,15 +36,12 @@ events.on("push", (brigadeEvent, project) => {
     // setup brigade jobs
     var docker = new Job("job-runner-docker")
     var helm = new Job("job-runner-helm")
-    var slack = new Job("slack-notify", "technosophos/slack-notify:latest", ["/slack-notify"])
-    slackJob(slack, project.secrets.SLACK_WEBHOOK, "Pipeline triggered....")
     dockerJobRunner(brigConfig, docker)
     helmJobRunner(brigConfig, helm, "prod")
     
     // start pipeline
     console.log(`==> starting pipeline for docker image: ${brigConfig.get("webACRImage")}:${brigConfig.get("imageTag")}`)
     var pipeline = new Group()
-    pipeline.add(slack)
     pipeline.add(docker)
     pipeline.add(helm)
     if (brigConfig.get("branch") == "master") {
@@ -63,7 +60,7 @@ events.on("after", (event, proj) => {
       SLACK_WEBHOOK: proj.secrets.slackWebhook,
       SLACK_USERNAME: "brigade-demo",
       SLACK_MESSAGE: "brigade pipeline finished successfully",
-      SLACK_COLOR: "#ff0000"
+      SLACK_COLOR: "#00ff00"
     }
 	slack.run()
     
@@ -102,7 +99,7 @@ function slackJob (s, webhook, message) {
       SLACK_WEBHOOK: webhook,
       SLACK_USERNAME: "brigade-demo",
       SLACK_MESSAGE: message,
-      SLACK_COLOR: "#00ff00"
+      SLACK_COLOR: "#0000ff"
     }
 }
 
