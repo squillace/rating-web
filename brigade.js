@@ -87,8 +87,8 @@ function helmJobRunner (config, h, deployType) {
     h.image = "chzbrgr71/k8s-helm:v2.7.2"
     h.tasks = [
         "cd /src/",
-        "git clone https://github.com/squillace/rating-charts.git",
-        "cd rating-charts",
+        "git clone https://github.com/squillace/draft-packs.git",
+        "cd packs",
         `helm upgrade --install rating-web ./rating-web --set web.image=${config.get("webACRImage")} --set web.imageTag=${config.get("imageTag")}`
     ]
 }
